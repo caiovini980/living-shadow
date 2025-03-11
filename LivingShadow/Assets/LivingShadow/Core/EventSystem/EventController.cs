@@ -1,26 +1,32 @@
 using UnityEngine;
 
+/*
+ I'm not using this, I believe. Maybe use this event system later when the project grows
+ */
+
 namespace Core.EventSystem
 {
-    public class EventController : MonoBehaviour
+    public static class EventController
     {
-        public delegate void LightTouchedAction();
+        public delegate void LightTouchedAction(Transform touchedTransform);
         public static event LightTouchedAction OnLightTouched;
-        public void TriggerOnLightTouchedEvent()
+        public static void TriggerOnLightTouchedEvent(Transform touchedTransform)
         {
             if (OnLightTouched != null)
             {
-                OnLightTouched();
+                OnLightTouched(touchedTransform);
                 return;
             }
 
             Debug.LogError("OnLightTouched is null");
         }
 
+        // TODO Create stop detection event
+
 
         public delegate void RestartLevelAction();
         public static event RestartLevelAction OnRestartLevel;
-        public void TriggerRestartLevelEvent()
+        public static void TriggerRestartLevelEvent()
         {
             if (OnRestartLevel != null)
             {
